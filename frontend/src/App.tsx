@@ -5,19 +5,19 @@ import Footer from "./Footer";
 import DataFetcher from "./DataFetcher";
 
 const sensorNames = [
-  "Joystick X",
-  "Joystick Y",
-  "Light",
-  "Temperature",
-  "Slider",
-  "Microphone",
-  "Accel X",
-  "Accel Y",
-  "Accel Z",
-  "Button 1",
-  "Button 2",
-  "Button 3",
-  "Button 4",
+  "data[0] = Joystick X",
+  "data[1] = Joystick Y",
+  "data[2] = Light",
+  "data[3] = Temperature",
+  "data[4] = Slider",
+  "data[5] = Microphone",
+  "data[6] = Accel X",
+  "data[7] = Accel Y",
+  "data[8] = Accel Z",
+  "data[9] = Button 1",
+  "data[10] = Button 2",
+  "data[11] = Button 3",
+  "data[12] = Button 4",
 ];
 
 const App: React.FC = () => {
