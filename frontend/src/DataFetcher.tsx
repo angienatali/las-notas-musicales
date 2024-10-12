@@ -30,12 +30,19 @@ const DataFetcher: React.FC<DataFetcherProps> = ({ onDataFetched }) => {
   }, []);
 
   return (
-    <button
+/*<button
       onClick={fetchData}
       className="border border-teal-400 text-stone-900 rounded px-4 py-2 bg-teal-400 active:bg-transparent active:text-teal-400 transition duration-300 mt-10"
     >
       ✐ Dibujar
-    </button>
+    </button>*/
+    <div className="switches">
+    
+<button>nota do ♩</button>
+<button>nota Re ♪</button>
+<button>nota Mi ♫</button>
+<button>nota Fa ♬</button>
+</div>
   );
 };
 

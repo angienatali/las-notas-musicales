@@ -3,11 +3,33 @@
 @tailwind utilities;
 
 body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "times new roman", Helvetica, Arial, sans-serif;
   line-height: 1.6;
   color: antiquewhite;
-  background-color: rgb(24, 24, 24);
+  background-color: rgba(88, 148, 150, 0.754);
 }
 .h-64 {
-  height: 11rem;
+  height: 20rem;
 }
+
+.switches button {
+  background-color: beige; /* Fondo beige */
+  color: black; /* Texto negro */
+  font-family: 'Times New Roman', Times, serif; /* Tipografía */
+  font-size: 20px; /* Tamaño de la fuente */
+  border: 2px solid black; /* Marco negro de 2px */
+  padding: 10px 20px; /* Espaciado interno */
+  cursor: pointer; /* Cambiar el cursor al pasar el mouse */
+  border-radius: 5px; /* Esquinas redondeadas (opcional) */
+}
+
+.switches button:hover {
+  opacity: 0.8; /* Efecto al pasar el mouse */
+}
+canvas {
+  background-color: #a9a9a9; /* Color gris oscuro */
+  border: 2px solid black; /* Marco negro de 2px */
+  border-radius: 5px; /* Esquinas redondeadas (opcional) */
+}
+
+
