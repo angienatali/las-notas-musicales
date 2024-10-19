@@ -34,11 +34,22 @@ const DataFetcher: React.FC<DataFetcherProps> = ({ onDataFetched }) => {
     fetchData();
   }, []);
 
-  const handleButtonClick = (index: number) => {
+  const handleButtonClick = async (index: number) => {
     const colors = ["blue", "green", "red", "yellow"];
     const newColors = buttonColors.map((color, i) => (i === index ? colors[index] : ""));
     setButtonColors(newColors);
-    startBounceAnimation(colors[index], index); // Start the bounce animation
+    startBounceAnimation(colors[index], index);
+
+    // Notas a enviar al Arduino
+    const notes = ['C', 'D', 'E', 'F']; // Notas correspondientes
+    const note = notes[index];
+
+    // Enviar la nota al backend
+    try {
+      await axios.post("http://localhost:4000/api/play-note", { note }); // Cambia esta URL según tu configuración
+    } catch (error) {
+      console.error("Error sending note:", error);
+    }
   };
 
   const startBounceAnimation = (color: string, index: number) => {
@@ -48,41 +59,37 @@ const DataFetcher: React.FC<DataFetcherProps> = ({ onDataFetched }) => {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    // Set the initial radius based on the button index
     const baseRadius = 30 + index * 10;
     bounceData.current = { radius: baseRadius, growing: true };
 
     const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Update the radius for bouncing effect
       if (bounceData.current) {
         const { radius, growing } = bounceData.current;
         ctx.fillStyle = color;
 
-        // Draw the circle
         ctx.beginPath();
         ctx.arc(canvas.width / 2, canvas.height / 2, radius, 0, Math.PI * 2);
         ctx.fill();
 
-        // Adjust the radius for the bounce effect
         if (growing) {
-          bounceData.current.radius += 2; // Grow
-          if (radius >= baseRadius + 20) bounceData.current.growing = false; // Start shrinking
+          bounceData.current.radius += 2;
+          if (radius >= baseRadius + 20) bounceData.current.growing = false;
         } else {
-          bounceData.current.radius -= 2; // Shrink
+          bounceData.current.radius -= 2;
           if (radius <= baseRadius) {
-            bounceData.current.growing = true; // Reset growth
+            bounceData.current.growing = true;
             cancelAnimationFrame(animationRef.current!);
-            return; // Stop the animation
+            return;
           }
         }
       }
 
-      animationRef.current = requestAnimationFrame(animate); // Continue animation
+      animationRef.current = requestAnimationFrame(animate);
     };
 
-    animate(); // Start the animation
+    animate();
   };
 
   return (
@@ -101,7 +108,7 @@ const DataFetcher: React.FC<DataFetcherProps> = ({ onDataFetched }) => {
               borderRadius: "5px",
               padding: "10px 20px",
               cursor: "pointer",
-              margin: "5px" // Margin between buttons
+              margin: "5px"
             }}
           >
             Nota {note} ♫
